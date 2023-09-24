@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+
+    <center>
+
+        <!-- debouncing UI html -->
+        
+    <button id="btn">debounce</button>
+    <button id="inc">0</button>
+    <button id="debounce">0</button>
+
+    <br>
+    <br>
+        <!-- throttling UI html -->
+
+    <button id="btn1">throttle</button>
+    <button id="inc1">0</button>
+    <button id="throttle">0</button>
+
+</center>
+    <script>
+            
+            // debouncing code
+
+        {let count=0;
+        let triggerCount=0;
+        let clickBtn=document.querySelector('#btn')
+        let debounce=document.querySelector('#debounce')
+        const deBounceCount=_.debounce(()=>{
+            document.querySelector('#debounce').innerHTML=++triggerCount;        
+        },800) 
+        clickBtn.addEventListener('click',()=>{
+            document.querySelector('#inc').innerHTML=(count+=1);  
+            deBounceCount();   
+        })}
+
+
+        //throttling code 
+
+        {let count1=0;
+        let triggerCount1=0;
+        let clickBtn=document.querySelector('#btn1')
+        let throttle=document.querySelector('#throttle')
+        const throttleCount=_.throttle(()=>{
+            document.querySelector('#throttle').innerHTML=++triggerCount1;        
+        },800) 
+        clickBtn.addEventListener('click',()=>{
+            document.querySelector('#inc1').innerHTML=(count1+=1);  
+            throttleCount();
+        })}
+
+
+        // difference between debounce and throttling
+        // debounce increses the counter only after button is stopped pressing for 800ms
+        // throttling increases the counter after every 800ms of button pressing
+        // both are used in the API calls for improve the performance
+
+
+        
+
+
+    </script>
+</body>
+</html>
+
+
+//

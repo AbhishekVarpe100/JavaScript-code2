@@ -1,0 +1,87 @@
+<script>
+//closure is a mechanism in java script to get access of outer scope elements from an inner scope or lexical scope
+function demo(){
+    let name="Abhi";
+    function inner(){
+        console.log(name)      // here name is a outer scope element 
+    }
+    return inner;
+}
+let s=demo();
+s()
+//or call it by using
+demo()()
+
+//example
+
+let e=10;
+function add(a){
+    return function(b){
+        return function(c){
+            //outer function scope
+            return function(d){
+                //local scope
+                return a+b+c+d+e;
+            }
+        }
+    }
+}
+
+let val=add(1)(2)(3)(4)
+console.log(val)
+
+// example
+
+function func(a){
+    function inner(innerNum){
+        console.log(a+innerNum)
+    }
+    return inner;
+}
+let a=func(6);
+a(10)
+a(21)
+
+
+// example for performance and optimization using closure
+
+function find(){
+    let a=[];
+    for(let i=0;i<1000000;i++){
+        a[i]=i*i;
+    }
+
+    return function inner(index){
+        return a[index]
+    }
+}
+const closure=find();
+console.time('6');
+closure(6)
+console.timeEnd('6');
+console.time('15');
+closure(50)
+console.timeEnd('15');
+
+
+function a1(){
+for(var i=0;i<3;i++){
+    setTimeout(()=>{
+        console.log(i);     // in this case output will be 3 for three times
+    },i*1000)               // because var is global scope
+}
+}
+a1();
+
+// function b1(){
+// for(let i=0;i<3;i++){
+//     setTimeout(()=>{         // in this case output will be 0 1 2 
+//         console.log(i);      // because let having block scope
+//     },i*1000)
+// }
+// }
+// b1();
+</script>
+
+
+

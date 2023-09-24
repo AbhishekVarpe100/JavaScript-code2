@@ -1,0 +1,115 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <h1 id="head">Hello world</h1>
+    </center>
+    
+</body>
+
+<script>
+
+// currying is the process which contains multiple functions in the single function
+// ex fun(1)(2)(3)
+// use of currying is transform a function with multiple arguments into a sequence of nesting functions
+
+
+// example 1
+
+function sum(a){
+    return (function(b){
+        return(function(c){
+            return a+b+c;
+        })
+    })
+}
+let val=sum(1)(2)(3)
+console.log(val)
+
+
+//example 2 evaluate
+
+function evaluate(op){
+    return(
+        function(a){
+            return(
+                function(b){
+                    switch(op){
+                        case 'sum':return a+b;
+                        break;
+                        case 'multiply':return a*b;
+                        break;
+                        case 'divide':return a/b;
+                        break;
+                        case 'substract':return a-b;
+                        break;
+                    }
+                }
+            )
+        }
+    )
+}
+
+let add=evaluate('sum')
+console.log(add(3)(7))
+
+
+// infinite currying
+function addition(a){
+    return (
+        function (b){
+            if(b) return addition(a+b);
+            return a;
+        }
+    )
+}
+
+console.log(addition(3)(4)(7)())
+
+
+// partial application example
+
+function partial_app_example(a){
+    return (
+        function(b,c){
+            return a+b+c;
+        }
+    )
+}
+
+console.log(partial_app_example(1)(2,5))
+
+
+//difference between currying and partial application is
+// in currying functions are as per the arguments it means how many arguments that have
+// in partial application function there are only two functions first function contains one parameter and other function contains rest of the remaining parameters 
+
+
+
+// currying also used in the DOM manipulation
+
+function dom(id){
+    return (
+       function(content){
+        document.querySelector('#'+id).textContent=content;
+       }
+    )
+}
+
+
+let manipulate=dom('head')
+manipulate("dummy content for checking")  // this will change the main heading
+</script>
+
+</html>
+
+
+
